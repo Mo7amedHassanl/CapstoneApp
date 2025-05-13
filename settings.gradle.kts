@@ -19,6 +19,6 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "Tannithea"
+rootProject.name = "CapstoneApp"
 include(":app")
  

@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Tannithea</string>
+    <string name="app_name">Capstone App</string>
     <string name="logo_content_description">Tannithea Logo</string>
     <string name="section_water_quality">Water Quality Sensors</string>
     <string name="section_system_parts">System Parts</string>

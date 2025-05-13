@@ -8,11 +8,11 @@ plugins {
 }
 
 android {
-    namespace = "com.m7md7sn.tannithea"
+    namespace = "com.m7md7sn.capstoneApp"
     compileSdk = 35
 
     defaultConfig {
-        applicationId = "com.m7md7sn.tannithea"
+        applicationId = "com.m7md7sn.capstoneApp"
         minSdk = 24
         targetSdk = 35
         versionCode = 1
