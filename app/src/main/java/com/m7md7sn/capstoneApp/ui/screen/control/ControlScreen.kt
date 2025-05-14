@@ -11,7 +11,6 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.foundation.rememberScrollState
@@ -32,44 +31,29 @@ import androidx.compose.material.icons.filled.PowerOff
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.TextButton
+import androidx.hilt.navigation.compose.hiltViewModel
 
 @Composable
 fun ControlScreen(
     modifier: Modifier = Modifier,
-    viewModel: ControlViewModel = viewModel()
+    viewModel: ControlViewModel = hiltViewModel()
 ) {
     val pumpNames = listOf(
-        "Aeration Pump",
-        "Main to Sand",
-        "Sand to Flow Controller",
-        "Flow Controller to EC",
-        "Flow Controller to Biochar",
-        "EC to Biochar",
-        "Biochar to UV to Main"
+        "Monitoring Pump",
+        "Acid Injection to Adsorption",
+        "Adsorption to Aloe Vera",
+        "Aloe Vera to Container",
+        "Aloe Vera Fan",
+        "Aloe Vera to Monitoring",
+        "Monitoring to Last Place"
     )
     val pumpStates by viewModel.pumpStates.collectAsState()
-    var showScheduleDialog by remember { mutableStateOf(false) }
 
     Column(
         modifier = modifier
             .fillMaxSize()
             .padding(16.dp)
     ) {
-        // Top quick actions
-        Row(
-            modifier = Modifier.fillMaxWidth(),
-            horizontalArrangement = Arrangement.SpaceEvenly
-        ) {
-            QuickActionButton(icon = Icons.Filled.PowerSettingsNew, label = "All On") {
-                pumpNames.indices.forEach { if (!pumpStates[it]) viewModel.togglePump(it) }
-            }
-            QuickActionButton(icon = Icons.Filled.PowerOff, label = "All Off") {
-                pumpNames.indices.forEach { if (pumpStates[it]) viewModel.togglePump(it) }
-            }
-            QuickActionButton(icon = Icons.Filled.Schedule, label = "Schedule") {
-                showScheduleDialog = true
-            }
-        }
         Spacer(modifier = Modifier.height(18.dp))
         // Grid of pump controls
         LazyVerticalGrid(
@@ -87,18 +71,6 @@ fun ControlScreen(
                 )
             }
         }
-    }
-    if (showScheduleDialog) {
-        AlertDialog(
-            onDismissRequest = { showScheduleDialog = false },
-            title = { Text("Schedule Pumps") },
-            text = { Text("Scheduling functionality coming soon.") },
-            confirmButton = {
-                TextButton(onClick = { showScheduleDialog = false }) {
-                    Text("OK")
-                }
-            }
-        )
     }
 }
 
